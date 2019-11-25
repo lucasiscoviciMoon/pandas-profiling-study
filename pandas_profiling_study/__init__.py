@@ -89,7 +89,7 @@ class ProfileReport(object):
     def change_sections(self, sections: list =["overview","variables","correlations","missing","sample"]):
         if not isinstance(sections,list):
             sections=[sections]
-        sections=[i for i in self.sections if i["anchor_id"] is sections]
+        sections=[i for i in self.sections if i["anchor_id"] in sections]
         self.html = to_html(self.sample, self.description_set, sections)
         return self
     def get_description(self) -> dict:
