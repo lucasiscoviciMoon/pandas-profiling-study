@@ -31,7 +31,7 @@ class ProfileReport(object):
     html = ""
     """the HTML representation of the report, without the wrapper (containing `<head>` etc.)"""
 
-    def __init__(self, df, **kwargs):
+    def __init__(self, df,sections: list =["overview","variables","correlations","missing","sample"], **kwargs):
         config.set_kwargs(kwargs)
 
         # Treat index as any other column
