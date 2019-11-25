@@ -215,7 +215,7 @@ def missing_bar2(data: pd.DataFrame) -> str:
       The resulting missing values bar plot encoded as a string.
     """
     labels = config["plot"]["missing"]["force_labels"].get(bool)
-    data = ((data.get(concat=T).notnull()).astype('int')).where(lambda a:a==0,np.nan)
+    data = ((data.notnull()).astype('int')).where(lambda a:a==0,np.nan)
     missingno.bar(
         data,
         figsize=(10, 5),
