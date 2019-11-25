@@ -87,9 +87,11 @@ class ProfileReport(object):
         self.sample = sample
 
     def change_sections(self, sections: list =["overview","variables","correlations","missing","sample"]):
+        if not isinstance(sections,list):
+            sections=[sections]
         sections=[i for i in self.sections if i["anchor_id"] is sections]
         self.html = to_html(sample, description_set, sections)
-
+        return self
     def get_description(self) -> dict:
         """Return the description (a raw statistical summary) of the dataset.
         
