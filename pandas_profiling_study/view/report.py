@@ -529,7 +529,7 @@ def to_sections(sample: dict, stats_object: dict, sections: list =["overview","v
             "content": render_sample_section,
         },
     )
-    sec=[addContent(sections_conf[i],stats_object) for i in sections]
+    sec=[addContent(sections_conf[i],sample if i =="sample" else stats_object) for i in sections]
     return sec
 
 def to_html(sample: dict, stats_object: dict, sections: list =["overview","variables","correlations","missing","sample"]) -> str:
