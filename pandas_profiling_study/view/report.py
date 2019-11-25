@@ -9,7 +9,7 @@ import pandas_profiling_study.view.templates as templates
 from pandas_profiling_study.config import config
 from pandas_profiling_study.model.base import Variable
 from pandas_profiling_study.model.messages import MessageType
-
+import warnings
 
 def freq_table(
     freqtable, n: int, table_template, max_number_to_print: int, idx: int, nb_col=6
