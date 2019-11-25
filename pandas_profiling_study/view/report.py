@@ -260,7 +260,7 @@ def render_variables_section(stats_object: dict) -> str:
                 elif m.message_type == MessageType.MISSING:
                     formatted_values["row_classes"]["missing"] = "alert"
 
-        if row["type"] in {Variable.TYPE_NUM, Variable.TYPE_DATE}:
+        if row["type"] in {Variable.TYPE_NUM, Variable.TYPE_DATE, Variable.TYPE_INT, Variable.TYPE_FLOAT}:
             formatted_values["histogram"] = histogram(
                 row["histogramdata"], row, row["histogram_bins"]
             )
@@ -270,7 +270,7 @@ def render_variables_section(stats_object: dict) -> str:
 
             if (
                 "histogram_bins_bayesian_blocks" in row
-                and row["type"] == Variable.TYPE_NUM
+                and row["type"] in {Variable.TYPE_NUM, Variable.TYPE_INT, Variable.TYPE_FLOAT}
             ):
                 formatted_values["histogram_bayesian_blocks"] = histogram(
                     row["histogramdata"], row, row["histogram_bins_bayesian_blocks"]
@@ -359,7 +359,7 @@ def render_variables_section(stats_object: dict) -> str:
                 ascending=False,
             )
 
-        if row["type"] == Variable.TYPE_NUM:
+        if row["type"] in {Variable.TYPE_NUM,Variable.TYPE_INT, Variable.TYPE_FLOAT}:
             formatted_values["sections"] = {
                 "statistics": {
                     "name": "Statistics",

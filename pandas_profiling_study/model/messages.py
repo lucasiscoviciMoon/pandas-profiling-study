@@ -119,7 +119,7 @@ def check_variable_messages(col: str, description: dict) -> List[Message]:
                 )
             )
 
-    if description["type"] in {Variable.TYPE_NUM}:
+    if description["type"] in {Variable.TYPE_NUM, Variable.TYPE_INT, Variable.TYPE_FLOAT}:
         # Skewness
         if warning_skewness(description["skewness"]):
             messages.append(

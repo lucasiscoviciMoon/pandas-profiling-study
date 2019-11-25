@@ -361,6 +361,8 @@ def describe_1d(series: pd.Series) -> dict:
             Variable.S_TYPE_CONST: describe_constant_1d,
             Variable.TYPE_BOOL: describe_boolean_1d,
             Variable.TYPE_NUM: describe_numeric_1d,
+            Variable.TYPE_INT: describe_numeric_1d,
+            Variable.TYPE_FLOAT: describe_numeric_1d,
             Variable.TYPE_DATE: describe_date_1d,
             Variable.S_TYPE_UNIQUE: describe_unique_1d,
             Variable.TYPE_CAT: describe_categorical_1d,
@@ -473,6 +475,7 @@ def get_missing_diagrams(df: pd.DataFrame, table_stats: dict) -> dict:
     """
     missing_map = {
         "bar": {"func": plot.missing_bar, "min_missing": 0, "name": "Count"},
+        "bar2": {"func": plot.missing_bar2, "min_missing": 0, "name": "Count"},
         "matrix": {"func": plot.missing_matrix, "min_missing": 0, "name": "Matrix"},
         "heatmap": {"func": plot.missing_heatmap, "min_missing": 2, "name": "Heatmap"},
         "dendrogram": {

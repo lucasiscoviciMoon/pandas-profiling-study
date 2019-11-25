@@ -205,6 +205,28 @@ def missing_bar(data: pd.DataFrame) -> str:
     plt.subplots_adjust(left=0.1, right=0.9, top=0.8, bottom=0.3)
     return plot_360_n0sc0pe(plt)
 
+def missing_bar2(data: pd.DataFrame) -> str:
+    """Generate missing values bar plot.
+
+    Args:
+      data: Pandas DataFrame to generate missing values bar plot from.
+
+    Returns:
+      The resulting missing values bar plot encoded as a string.
+    """
+    labels = config["plot"]["missing"]["force_labels"].get(bool)
+    data = ((data.get(concat=T).notnull()).astype('int')).where(lambda a:a==0,np.nan)
+    missingno.bar(
+        data,
+        figsize=(10, 5),
+        color=hex_to_rgb(config["style"]["primary_color"].get(str)),
+        fontsize=get_font_size(data),
+        labels=labels,
+    )
+    for ax0 in plt.gcf().get_axes():
+        ax0.grid(False)
+    plt.subplots_adjust(left=0.1, right=0.9, top=0.8, bottom=0.3)
+    return plot_360_n0sc0pe(plt)
 
 def missing_heatmap(data: pd.DataFrame) -> str:
     """Generate missing values heatmap plot.
