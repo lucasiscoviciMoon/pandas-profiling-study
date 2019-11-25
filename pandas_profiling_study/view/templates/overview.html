@@ -34,17 +34,17 @@
         <p class="h2">Variables types</p>
         <table class="table table-condensed stats">
             <tbody>
-            <!-- <tr>
-                <th>Numeric</th>
-                <td>{{ values['NUM'] }}</td>
-            </tr> -->
             <tr>
-                <th>Integer</th>
-                <td>{{ values['INT'] }}</td>
+                <th>Numeric</th>
+                <td>{{ values['INT'] + values['FLOAT'] }}</td>
             </tr>
             <tr>
-                <th>Float</th>
-                <td>{{ values['FLOAT'] }}</td>
+                <th>&nbsp;&nbsp;Integer</th>
+                <td>&nbsp;&nbsp;{{ values['INT'] }}</td>
+            </tr>
+            <tr>
+                <th>&nbsp;&nbsp;Float</th>
+                <td>&nbsp;&nbsp;{{ values['FLOAT'] }}</td>
             </tr>
             <tr>
                 <th>Categorical</th>
