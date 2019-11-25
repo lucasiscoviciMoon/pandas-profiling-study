@@ -6,8 +6,8 @@ from enum import Enum, unique
 from urllib.parse import urlparse
 
 
-from pandas_profiling.config import config
-from pandas_profiling.utils.data_types import str_is_path
+from pandas_profiling_study.config import config
+from pandas_profiling_study.utils.data_types import str_is_path
 
 
 @unique

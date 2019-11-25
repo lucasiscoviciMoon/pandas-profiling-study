@@ -12,21 +12,21 @@ import numpy as np
 import pandas as pd
 from astropy.stats import bayesian_blocks
 
-from pandas_profiling.config import config as config
-from pandas_profiling.model.messages import (
+from pandas_profiling_study.config import config as config
+from pandas_profiling_study.model.messages import (
     check_variable_messages,
     check_table_messages,
     warning_type_date,
 )
 
-from pandas_profiling.model import base
-from pandas_profiling.model.base import Variable
-from pandas_profiling.model.correlations import (
+from pandas_profiling_study.model import base
+from pandas_profiling_study.model.base import Variable
+from pandas_profiling_study.model.correlations import (
     calculate_correlations,
     perform_check_correlation,
 )
-from pandas_profiling.utils.common import update
-from pandas_profiling.view import plot
+from pandas_profiling_study.utils.common import update
+from pandas_profiling_study.view import plot
 
 
 def describe_numeric_1d(series: pd.Series, series_description: dict) -> dict:

@@ -483,8 +483,56 @@ def render_sample_section(sample: dict) -> str:
 
     return templates.template("components/list.html").render(values=items)
 
+def addContent(sec: dict,  stats_object: dict) -> dict:
+    sec["content"] =  sec["content"](stats_object)
+    return sec
 
-def to_html(sample: dict, stats_object: dict) -> str:
+def to_sections(sample: dict, stats_object: dict, sections: list =["overview","variables","correlations","missing","sample"]) -> list:
+    if not isinstance(sample, dict):
+        raise TypeError("sample must be of type dict")
+
+    if not isinstance(stats_object, dict):
+        raise TypeError(
+            "stats_object must be of type dict. Did you generate this using the "
+            "pandas_profiling.describe() function?"
+        )
+
+    if not {"table", "variables", "correlations"}.issubset(set(stats_object.keys())):
+        raise TypeError(
+            "stats_object badly formatted. Did you generate this using the pandas_profiling.describe() function?"
+        )
+
+    sections_conf=dict( 
+        overview={
+            "title": "Overview",
+            "anchor_id": "overview",
+            "content": render_overview_section,
+        },
+        variables={
+            "title": "Variables",
+            "anchor_id": "variables",
+            "content": render_variables_section,
+        },
+        correlations={
+            "title": "Correlations",
+            "anchor_id": "correlations",
+            "content": render_correlations_section,
+        },
+        missing={
+            "title": "Missing values",
+            "anchor_id": "missing",
+            "content": render_missing_section,
+        },
+        sample={
+            "title": "Sample",
+            "anchor_id": "sample",
+            "content": render_sample_section,
+        },
+    )
+    sec=[addContent(sections_conf[i],stats_object) for i in sections]
+    return sec
+
+def to_html(sample: dict, stats_object: dict, sections: list =["overview","variables","correlations","missing","sample"]) -> str:
     """Generate a HTML report from summary statistics and a given sample.
 
     Args:
@@ -509,33 +557,7 @@ def to_html(sample: dict, stats_object: dict) -> str:
             "stats_object badly formatted. Did you generate this using the pandas_profiling.describe() function?"
         )
 
-    sections = [
-        {
-            "title": "Overview",
-            "anchor_id": "overview",
-            "content": render_overview_section(stats_object),
-        },
-        {
-            "title": "Variables",
-            "anchor_id": "variables",
-            "content": render_variables_section(stats_object),
-        },
-        {
-            "title": "Correlations",
-            "anchor_id": "correlations",
-            "content": render_correlations_section(stats_object),
-        },
-        {
-            "title": "Missing values",
-            "anchor_id": "missing",
-            "content": render_missing_section(stats_object),
-        },
-        {
-            "title": "Sample",
-            "anchor_id": "sample",
-            "content": render_sample_section(sample),
-        },
-    ]
+    sections = to_sections(sample,stats_object,sections) if isinstance(sections[0],list) else sections
 
     return templates.template("base.html").render(
         sections=sections, full_width=config["style"]["full_width"].get(bool)

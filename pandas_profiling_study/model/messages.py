@@ -8,8 +8,8 @@ import numpy as np
 import re
 from dateutil.parser import parse
 
-from pandas_profiling.config import config
-from pandas_profiling.model.base import Variable
+from pandas_profiling_study.config import config
+from pandas_profiling_study.model.base import Variable
 
 
 @unique
