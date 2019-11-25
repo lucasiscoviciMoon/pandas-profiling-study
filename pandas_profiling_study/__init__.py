@@ -90,7 +90,7 @@ class ProfileReport(object):
         if not isinstance(sections,list):
             sections=[sections]
         sections=[i for i in self.sections if i["anchor_id"] is sections]
-        self.html = to_html(sample, description_set, sections)
+        self.html = to_html(self.sample, self.description_set, sections)
         return self
     def get_description(self) -> dict:
         """Return the description (a raw statistical summary) of the dataset.
