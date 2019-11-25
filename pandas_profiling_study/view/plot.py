@@ -13,9 +13,9 @@ from matplotlib import pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 from pkg_resources import resource_filename
 
-from pandas_profiling import config
-from pandas_profiling.model.base import Variable
-from pandas_profiling.view.formatters import hex_to_rgb
+from pandas_profiling_study import config
+from pandas_profiling_study.model.base import Variable
+from pandas_profiling_study.view.formatters import hex_to_rgb
 
 register_matplotlib_converters()
 matplotlib.style.use(resource_filename(__name__, "pandas_profiling.mplstyle"))

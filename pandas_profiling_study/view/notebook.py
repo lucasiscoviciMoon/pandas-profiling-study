@@ -3,7 +3,7 @@ import html
 from pathlib import Path
 
 
-from pandas_profiling.config import config
+from pandas_profiling_study.config import config
 
 
 def get_notebook_iframe_srcdoc(profile):
