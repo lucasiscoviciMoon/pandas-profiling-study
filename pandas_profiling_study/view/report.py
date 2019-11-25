@@ -556,8 +556,12 @@ def to_html(sample: dict, stats_object: dict, sections: list =["overview","varia
         raise TypeError(
             "stats_object badly formatted. Did you generate this using the pandas_profiling.describe() function?"
         )
-
-    sections = to_sections(sample,stats_object,sections) if isinstance(sections[0],list) else sections
+    if len(sections) > 0:
+        sections = to_sections(sample,stats_object,sections) if isinstance(sections[0],list) else sections
+    else:
+        warnings.warn("""
+sections is empty""")
+        sections=[]
 
     return templates.template("base.html").render(
         sections=sections, full_width=config["style"]["full_width"].get(bool)
