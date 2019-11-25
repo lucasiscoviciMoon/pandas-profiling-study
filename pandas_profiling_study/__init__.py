@@ -19,7 +19,7 @@ from pandas_profiling_study.controller import pandas_decorator
 import pandas_profiling_study.view.templates as templates
 from pandas_profiling_study.model.describe import describe as describe_df
 from pandas_profiling_study.view.notebook import display_notebook_iframe
-from pandas_profiling_study.view.report import to_html
+from pandas_profiling_study.view.report import to_html, to_sections
 
 
 class ProfileReport(object):
@@ -89,7 +89,7 @@ class ProfileReport(object):
     def change_sections(self, sections: list =["overview","variables","correlations","missing","sample"]):
         sections=[i for i in self.sections if i["anchor_id"] is sections]
         self.html = to_html(sample, description_set, sections)
-        
+
     def get_description(self) -> dict:
         """Return the description (a raw statistical summary) of the dataset.
         
