@@ -2,12 +2,12 @@
 from pathlib import Path
 
 import pandas as pd
-import pandas_profiling
-from pandas_profiling import __version__
-from pandas_profiling.config import config
+import pandas_profiling_study
+from pandas_profiling_study import __version__
+from pandas_profiling_study.config import config
 import argparse
 
-from pandas_profiling.utils.dataframe import read_pandas
+from pandas_profiling_study.utils.dataframe import read_pandas
 
 
 def parse_args(args: list or None = None) -> argparse.Namespace:

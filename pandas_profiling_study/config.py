@@ -2,7 +2,7 @@
 import argparse
 
 import confuse
-from pandas_profiling.utils.paths import get_config_default
+from pandas_profiling_study.utils.paths import get_config_default
 
 
 class Config(object):

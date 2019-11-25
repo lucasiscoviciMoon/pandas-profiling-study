@@ -33,6 +33,7 @@ cardinality_threshold: 50
 # which diagrams to show
 missing_diagrams:
     bar: True
+    bar2: True
     matrix: True
     heatmap: True
     dendrogram: True
@@ -68,6 +69,8 @@ plot:
         cmap: 'bwr'
 
     missing:
+        withPerc: True
+        round: 2
         cmap: 'RdBu'
         # Force labels when there are > 50 variables
         # https://github.com/ResidentMario/missingno/issues/93#issuecomment-513322615

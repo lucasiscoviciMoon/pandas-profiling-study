@@ -12,21 +12,21 @@ import numpy as np
 import pandas as pd
 from astropy.stats import bayesian_blocks
 
-from pandas_profiling.config import config as config
-from pandas_profiling.model.messages import (
+from pandas_profiling_study.config import config as config
+from pandas_profiling_study.model.messages import (
     check_variable_messages,
     check_table_messages,
     warning_type_date,
 )
 
-from pandas_profiling.model import base
-from pandas_profiling.model.base import Variable
-from pandas_profiling.model.correlations import (
+from pandas_profiling_study.model import base
+from pandas_profiling_study.model.base import Variable
+from pandas_profiling_study.model.correlations import (
     calculate_correlations,
     perform_check_correlation,
 )
-from pandas_profiling.utils.common import update
-from pandas_profiling.view import plot
+from pandas_profiling_study.utils.common import update
+from pandas_profiling_study.view import plot
 
 
 def describe_numeric_1d(series: pd.Series, series_description: dict) -> dict:
@@ -361,6 +361,8 @@ def describe_1d(series: pd.Series) -> dict:
             Variable.S_TYPE_CONST: describe_constant_1d,
             Variable.TYPE_BOOL: describe_boolean_1d,
             Variable.TYPE_NUM: describe_numeric_1d,
+            Variable.TYPE_INT: describe_numeric_1d,
+            Variable.TYPE_FLOAT: describe_numeric_1d,
             Variable.TYPE_DATE: describe_date_1d,
             Variable.S_TYPE_UNIQUE: describe_unique_1d,
             Variable.TYPE_CAT: describe_categorical_1d,
@@ -473,6 +475,7 @@ def get_missing_diagrams(df: pd.DataFrame, table_stats: dict) -> dict:
     """
     missing_map = {
         "bar": {"func": plot.missing_bar, "min_missing": 0, "name": "Count"},
+        "bar2": {"func": plot.missing_bar2, "min_missing": 0, "name": "Missing"},
         "matrix": {"func": plot.missing_matrix, "min_missing": 0, "name": "Matrix"},
         "heatmap": {"func": plot.missing_heatmap, "min_missing": 2, "name": "Heatmap"},
         "dendrogram": {

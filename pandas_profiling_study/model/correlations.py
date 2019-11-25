@@ -10,8 +10,8 @@ from confuse import NotFoundError
 from pandas.core.base import DataError
 from scipy import stats
 
-from pandas_profiling.config import config
-from pandas_profiling.model.base import Variable
+from pandas_profiling_study.config import config
+from pandas_profiling_study.model.base import Variable
 
 
 def cramers_corrected_stat(confusion_matrix, correction: bool) -> float:

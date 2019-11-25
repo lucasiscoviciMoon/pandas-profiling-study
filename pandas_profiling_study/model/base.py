@@ -6,8 +6,8 @@ from enum import Enum, unique
 from urllib.parse import urlparse
 
 
-from pandas_profiling.config import config
-from pandas_profiling.utils.data_types import str_is_path
+from pandas_profiling_study.config import config
+from pandas_profiling_study.utils.data_types import str_is_path
 
 
 @unique
@@ -22,6 +22,12 @@ class Variable(Enum):
 
     TYPE_NUM = "NUM"
     """A numeric variable"""
+
+    TYPE_INT = "INT"
+    """A INT variable"""
+
+    TYPE_FLOAT = "FLOAT"
+    """A FLOAT variable"""
 
     TYPE_DATE = "DATE"
     """A date variable"""
@@ -107,6 +113,7 @@ def is_boolean(series: pd.Series, series_description: dict) -> bool:
             ["yes", "no"],
             ["true", "false"],
             ["t", "f"],
+            ["`0`","`1`"]
         ]
 
         if len(unique_values) == 2 and any(
@@ -116,6 +123,32 @@ def is_boolean(series: pd.Series, series_description: dict) -> bool:
 
     return False
 
+def is_int(series: pd.Series, series_description: dict) -> bool:
+    """Is the series int type?
+
+    Args:
+        series: Series
+        series_description: Series description
+
+    Returns:
+        True is the series is numeric type (NaNs allowed).
+    """
+    return pd.api.types.is_integer_dtype(series) and series_description[
+        "distinct_count_without_nan"
+    ] >= config["low_categorical_threshold"].get(int)
+def is_float(series: pd.Series, series_description: dict) -> bool:
+    """Is the series int type?
+
+    Args:
+        series: Series
+        series_description: Series description
+
+    Returns:
+        True is the series is numeric type (NaNs allowed).
+    """
+    return pd.api.types.is_float_dtype(series) and series_description[
+        "distinct_count_without_nan"
+    ] >= config["low_categorical_threshold"].get(int)
 
 def is_numeric(series: pd.Series, series_description: dict) -> bool:
     """Is the series numeric type?
@@ -198,6 +231,10 @@ def get_var_type(series: pd.Series) -> dict:
             var_type = Variable.S_TYPE_CONST
         elif is_boolean(series, series_description):
             var_type = Variable.TYPE_BOOL
+        elif is_int(series,series_description):
+            var_type = Variable.TYPE_INT
+        elif is_float(series,series_description):
+            var_type = Variable.TYPE_FLOAT
         elif is_numeric(series, series_description):
             var_type = Variable.TYPE_NUM
         elif is_date(series):

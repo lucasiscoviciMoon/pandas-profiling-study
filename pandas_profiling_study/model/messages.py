@@ -8,8 +8,8 @@ import numpy as np
 import re
 from dateutil.parser import parse
 
-from pandas_profiling.config import config
-from pandas_profiling.model.base import Variable
+from pandas_profiling_study.config import config
+from pandas_profiling_study.model.base import Variable
 
 
 @unique
@@ -119,7 +119,7 @@ def check_variable_messages(col: str, description: dict) -> List[Message]:
                 )
             )
 
-    if description["type"] in {Variable.TYPE_NUM}:
+    if description["type"] in {Variable.TYPE_NUM, Variable.TYPE_INT, Variable.TYPE_FLOAT}:
         # Skewness
         if warning_skewness(description["skewness"]):
             messages.append(

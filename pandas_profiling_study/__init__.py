@@ -7,19 +7,19 @@ import warnings
 
 import pandas as pd
 
-from pandas_profiling.version import __version__
-from pandas_profiling.utils.dataframe import clean_column_names, rename_index
-from pandas_profiling.utils.paths import get_config_default, get_project_root
+from pandas_profiling_study.version import __version__
+from pandas_profiling_study.utils.dataframe import clean_column_names, rename_index
+from pandas_profiling_study.utils.paths import get_config_default, get_project_root
 
 from pathlib import Path
 import numpy as np
 
-from pandas_profiling.config import config
-from pandas_profiling.controller import pandas_decorator
-import pandas_profiling.view.templates as templates
-from pandas_profiling.model.describe import describe as describe_df
-from pandas_profiling.view.notebook import display_notebook_iframe
-from pandas_profiling.view.report import to_html
+from pandas_profiling_study.config import config
+from pandas_profiling_study.controller import pandas_decorator
+import pandas_profiling_study.view.templates as templates
+from pandas_profiling_study.model.describe import describe as describe_df
+from pandas_profiling_study.view.notebook import display_notebook_iframe
+from pandas_profiling_study.view.report import to_html, to_sections
 
 
 class ProfileReport(object):
@@ -31,7 +31,7 @@ class ProfileReport(object):
     html = ""
     """the HTML representation of the report, without the wrapper (containing `<head>` etc.)"""
 
-    def __init__(self, df, **kwargs):
+    def __init__(self, df,sections: list =["overview","variables","correlations","missing","sample"], **kwargs):
         config.set_kwargs(kwargs)
 
         # Treat index as any other column
@@ -78,13 +78,20 @@ class ProfileReport(object):
             sample["tail"] = df.tail(n=n_tail)
 
         # Render HTML
-        self.html = to_html(sample, description_set)
+        self.sections = to_sections(sample, description_set,sections)
+        self.html = to_html(sample, description_set, self.sections)
         self.minify_html = config["minify_html"].get(bool)
         self.use_local_assets = config["use_local_assets"].get(bool)
         self.title = config["title"].get(str)
         self.description_set = description_set
         self.sample = sample
 
+    def change_sections(self, sections: list =["overview","variables","correlations","missing","sample"]):
+        if not isinstance(sections,list):
+            sections=[sections]
+        sections=[i for i in self.sections if i["anchor_id"] in sections]
+        self.html = to_html(self.sample, self.description_set, sections)
+        return self
     def get_description(self) -> dict:
         """Return the description (a raw statistical summary) of the dataset.
         

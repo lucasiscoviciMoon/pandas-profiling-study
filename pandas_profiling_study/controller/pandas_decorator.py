@@ -1,6 +1,6 @@
 """This file add the decorator on the DataFrame object."""
 from pandas import DataFrame
-from pandas_profiling.__init__ import ProfileReport
+from pandas_profiling_study.__init__ import ProfileReport
 
 
 def profile_report(df, **kwargs) -> ProfileReport:

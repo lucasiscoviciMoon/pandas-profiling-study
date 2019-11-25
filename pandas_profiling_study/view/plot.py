@@ -13,9 +13,9 @@ from matplotlib import pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 from pkg_resources import resource_filename
 
-from pandas_profiling import config
-from pandas_profiling.model.base import Variable
-from pandas_profiling.view.formatters import hex_to_rgb
+from pandas_profiling_study import config
+from pandas_profiling_study.model.base import Variable
+from pandas_profiling_study.view.formatters import hex_to_rgb
 
 register_matplotlib_converters()
 matplotlib.style.use(resource_filename(__name__, "pandas_profiling.mplstyle"))
@@ -202,9 +202,46 @@ def missing_bar(data: pd.DataFrame) -> str:
     )
     for ax0 in plt.gcf().get_axes():
         ax0.grid(False)
+
+    if config["plot"]["missing"]["withPerc"].get(bool):
+        labels = [item.get_text() for item in plt.gcf().axes[2].get_xticklabels()]
+        labelsInt = [int(i) for i in labels]
+        labels2=np.round(np.array(labelsInt)/len(data),config["plot"]["missing"]["round"].get(int))
+        labels2 = ["{} ({})".format(i,j) for i,j in zip(labels,labels2)]
+        plt.gcf().axes[2].set_xticklabels(labels2)
+
     plt.subplots_adjust(left=0.1, right=0.9, top=0.8, bottom=0.3)
     return plot_360_n0sc0pe(plt)
 
+def missing_bar2(data: pd.DataFrame) -> str:
+    """Generate missing values bar plot.
+
+    Args:
+      data: Pandas DataFrame to generate missing values bar plot from.
+
+    Returns:
+      The resulting missing values bar plot encoded as a string.
+    """
+    labels = config["plot"]["missing"]["force_labels"].get(bool)
+    data = ((data.notnull()).astype('int')).where(lambda a:a==0,np.nan)
+    missingno.bar(
+        data,
+        figsize=(10, 5),
+        color=hex_to_rgb(config["style"]["primary_color"].get(str)),
+        fontsize=get_font_size(data),
+        labels=labels,
+    )
+    for ax0 in plt.gcf().get_axes():
+        ax0.grid(False)
+
+    if config["plot"]["missing"]["withPerc"].get(bool):
+        labels = [item.get_text() for item in plt.gcf().axes[2].get_xticklabels()]
+        labelsInt = [int(i) for i in labels]
+        labels2=np.round(np.array(labelsInt)/len(data),config["plot"]["missing"]["round"].get(int))
+        labels2 = ["{} ({})".format(i,j) for i,j in zip(labels,labels2)]
+        plt.gcf().axes[2].set_xticklabels(labels2)
+    plt.subplots_adjust(left=0.1, right=0.9, top=0.8, bottom=0.3)
+    return plot_360_n0sc0pe(plt)
 
 def missing_heatmap(data: pd.DataFrame) -> str:
     """Generate missing values heatmap plot.

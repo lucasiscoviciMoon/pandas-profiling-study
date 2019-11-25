@@ -1,7 +1,7 @@
-{% with vartype='URL' %}
+{% with vartype='Special, Path' %}
     {% include '_row_header.html' %}
 {% endwith %}
-<div class="col-sm-3">
+<div class="col-sm-9">
     <table class="stats">
         <tr class="{{ values['row_classes']['distinct_count'] }}">
             <th>Distinct count</th>
@@ -19,9 +19,24 @@
             <th>Missing (n)</th>
             <td>{{ values['n_missing'] }}</td>
         </tr>
+        <tr >
+            <th>Common prefix</th>
+            <td>{{ values['common_prefix'] }}</td>
+        </tr>
     </table>
 </div>
-{{ values['minifreqtable'] }}
+
+{#<div class="row col-sm-12" id="descriptives{{ values['varid'] }}">#}
+{#    <table>#}
+{##}
+{#        </table>#}
+{#<ul>#}
+{#    <li>Existing</li>#}
+{#    <li>Images (EXIF, resolution etc., corrupt)</li>#}
+{#</ul>#}
+{##}
+{#</div>#}
+
 <div class="col-sm-12 text-right">
     <a role="button" data-toggle="collapse"
        data-target="#descriptives{{ values['varid'] }}, #minifreqtable{{ values['varid'] }}"
