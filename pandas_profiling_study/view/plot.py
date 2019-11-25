@@ -202,6 +202,11 @@ def missing_bar(data: pd.DataFrame) -> str:
     )
     for ax0 in plt.gcf().get_axes():
         ax0.grid(False)
+    if config["plot"]["missing"]["withPerc"].get(bool):
+        labels = [item.get_text() for item in plt.gcf().axes[2].get_xticklabels()]
+        labelsInt = [int(i) for i in labels]
+        labels2=np.round(np.array(labelsInt)/len(data),config["plot"]["missing"]["round"].get(int))
+        plt.gcf().axes[2].set_xticklabels(labels2)
     plt.subplots_adjust(left=0.1, right=0.9, top=0.8, bottom=0.3)
     return plot_360_n0sc0pe(plt)
 
@@ -225,6 +230,11 @@ def missing_bar2(data: pd.DataFrame) -> str:
     )
     for ax0 in plt.gcf().get_axes():
         ax0.grid(False)
+    if config["plot"]["missing"]["withPerc"].get(bool):
+        labels = [item.get_text() for item in plt.gcf().axes[2].get_xticklabels()]
+        labelsInt = [int(i) for i in labels]
+        labels2=np.round(np.array(labelsInt)/len(data),config["plot"]["missing"]["round"].get(int))
+        plt.gcf().axes[2].set_xticklabels(labels2)
     plt.subplots_adjust(left=0.1, right=0.9, top=0.8, bottom=0.3)
     return plot_360_n0sc0pe(plt)
 

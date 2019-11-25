@@ -475,7 +475,7 @@ def get_missing_diagrams(df: pd.DataFrame, table_stats: dict) -> dict:
     """
     missing_map = {
         "bar": {"func": plot.missing_bar, "min_missing": 0, "name": "Count"},
-        "bar2": {"func": plot.missing_bar2, "min_missing": 0, "name": "Count"},
+        "bar2": {"func": plot.missing_bar2, "min_missing": 0, "name": "Missing"},
         "matrix": {"func": plot.missing_matrix, "min_missing": 0, "name": "Matrix"},
         "heatmap": {"func": plot.missing_heatmap, "min_missing": 2, "name": "Heatmap"},
         "dendrogram": {

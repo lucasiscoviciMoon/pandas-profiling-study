@@ -37,6 +37,8 @@ missing_diagrams:
     matrix: True
     heatmap: True
     dendrogram: True
+    withPerc: True
+    round: 2
 
 correlations:
     pearson: True
