@@ -33,6 +33,7 @@ cardinality_threshold: 50
 # which diagrams to show
 missing_diagrams:
     bar: True
+    bar2: True
     matrix: True
     heatmap: True
     dendrogram: True
