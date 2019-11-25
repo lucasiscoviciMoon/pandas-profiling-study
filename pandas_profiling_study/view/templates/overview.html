@@ -39,32 +39,40 @@
                 <td>{{ values['INT'] + values['FLOAT'] }}</td>
             </tr>
             <tr>
-                <th>&nbsp;&nbsp;Integer</th>
-                <td>&nbsp;&nbsp;{{ values['INT'] }}</td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;Integer</th>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ values['INT'] }}</td>
             </tr>
             <tr>
-                <th>&nbsp;&nbsp;Float</th>
-                <td>&nbsp;&nbsp;{{ values['FLOAT'] }}</td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;Float</th>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ values['FLOAT'] }}</td>
             </tr>
             <tr>
                 <th>Categorical</th>
-                <td>{{ values['CAT'] }}</td>
+                <td>{{ values['CAT'] +  values['BOOL'] }}</td>
             </tr>
             <tr>
-                <th>Boolean</th>
-                <td>{{ values['BOOL'] }}</td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;Categorical (Not Boolean)</th>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ values['CAT']}}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{{ values['DATE'] }}</td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;Boolean</th>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ values['BOOL'] }}</td>
             </tr>
             <tr>
-                <th>URL</th>
-                <td>{{ values['URL'] }}</td>
+                <th>Special</th>
+                <td>{{ values['DATE'] +  values['URL'] +  values['UNIQUE'] }}</td>
             </tr>
             <tr>
-                <th>Text (Unique)</th>
-                <td>{{ values['UNIQUE'] }}</td>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;Date</th>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ values['DATE'] }}</td>
+            </tr>
+            <tr>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;URL</th>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ values['URL'] }}</td>
+            </tr>
+            <tr>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;Text (Unique)</th>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ values['UNIQUE'] }}</td>
             </tr>
             <tr>
                 <th>Rejected</th>
