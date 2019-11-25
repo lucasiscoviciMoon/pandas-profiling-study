@@ -113,6 +113,7 @@ def is_boolean(series: pd.Series, series_description: dict) -> bool:
             ["yes", "no"],
             ["true", "false"],
             ["t", "f"],
+            ["`0`","`1`"]
         ]
 
         if len(unique_values) == 2 and any(
