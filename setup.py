@@ -13,7 +13,7 @@ with (source_root / "requirements.txt").open(encoding="utf8") as f:
 
 version = "2.5.3"
 
-with (source_root / "src" / "pandas_profiling" / "version.py").open(
+with (source_root / "src" / "pandas_profiling_study" / "version.py").open(
     "w", encoding="utf-8"
 ) as f:
     f.writelines(
@@ -25,7 +25,7 @@ with (source_root / "src" / "pandas_profiling" / "version.py").open(
     )
 
 setup(
-    name="pandas-profiling",
+    name="pandas_profiling_study",
     version=version,
     author="Simon Brugman",
     author_email="pandasprofiling@gmail.com",
@@ -63,8 +63,10 @@ setup(
     long_description_content_type="text/markdown",
     entry_points={
         "console_scripts": [
-            "pandas_profiling = pandas_profiling.controller.console:main"
+            "pandas_profiling_study = pandas_profiling_study.controller.console:main"
         ]
     },
     options={"bdist_wheel": {"universal": True}},
 )
+
+
