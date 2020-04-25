@@ -550,7 +550,7 @@ def sort_column_names(dct: Mapping, sort: str):
     return dct
 
 
-def describe(df: pd.DataFrame) -> dict:
+def describe(df: pd.DataFrame, sections: list = []) -> dict:
     """Calculate the statistics for each series in this DataFrame.
 
     Args:
