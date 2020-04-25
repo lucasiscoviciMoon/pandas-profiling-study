@@ -61,7 +61,7 @@ class ProfileReport(object):
         df.columns = df.columns.astype("str")
 
         # Get dataset statistics
-        description_set = describe_df(df)
+        description_set = describe_df(df, sections)
 
         # Build report structure
         self.sample = self.get_sample(df)
